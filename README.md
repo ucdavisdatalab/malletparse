@@ -9,6 +9,11 @@ Also contains custom functions for creating the json part of [LDAvis](https://gi
 
 Clone the bitbucket repository. Through the command line run R CMD build and R CMD INSTALL. When installed refer to the **vignette** to see how to use it.
 
+Alternatively
+```
+devtools::install_bitbucket("digitalscholarship/malletparsedsi")
+```
+
 ## Mallet Output Files ##
 
 When running a topic model with Mallet there are several different outputs available.  
