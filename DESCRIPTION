@@ -1,0 +1,14 @@
+Package: malletparseDSI
+Type: Package
+Title: Parses mallet output files without using rJava
+Version: 1.0
+Date: 2019-06-19
+Author: Arthur Koehl
+Maintainer: Arthur Koehl <avkoehl@ucdavis.edu>
+Description: This package parses the various text file outputs of the MALLET topic model package. Use this package if you want a way to do so without using rJava and without having to load the full text files into memory. This application uses cpp and streams the data from the files. For the topic state file, this application streams the gzipped file. To be used with ldavis. This package comes with a customized createJSON function that computes the topic frequencies/proporations without having to load the doc topics matrix into memory.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.1),
+	 RJSONIO,
+	 proxy
+LinkingTo: Rcpp
+RoxygenNote: 6.1.1

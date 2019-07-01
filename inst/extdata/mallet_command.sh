@@ -1,0 +1,1 @@
+mallet train-topics --input reviews.mallet --output-model model.bin --output-state state-file.gz --output-doc-topics doc-topics.dat --word-topic-counts-file word-topic-counts.dat --topic-word-weights-file word-weights.dat --output-topic-keys topic-keys.dat --num-iterations 600
