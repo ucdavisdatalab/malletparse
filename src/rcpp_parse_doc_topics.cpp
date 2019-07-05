@@ -82,7 +82,7 @@ Rcpp::List rcpp_parse_doc_topics_gz(std::string fpath, int topn, std::string ttf
 	while (infile.get(c)) 
 	{
 	    if (line_index % 100000 == 0 && line_index != 0)
-		Rcpp::Rcout << std::setprecision(3) << (double)line_index / 1000000 << " million lines \n";
+		Rcpp::Rcout << std::setprecision(3) << (double)line_index / 1000000 << " million lines" << std::flush << std::endl;;
 
 	    line = line + c;
 
@@ -273,7 +273,7 @@ Rcpp::List rcpp_parse_doc_topics_mallet(std::string fpath, int topn, std::string
 	while (getline(infile, line))
 	{
 	    if (line_index % 100000 == 0 && line_index != 0)
-		Rcpp::Rcout << std::setprecision(3) << (double)line_index / 1000000 << " million lines \n";
+		Rcpp::Rcout << std::setprecision(3) << (double)line_index / 1000000 << " million lines" << std::flush << std::endl;
 
 	    elem = strsplit(line, '\t');
 	    elem.erase (elem.begin(), elem.begin() + 2); // delete the first two values

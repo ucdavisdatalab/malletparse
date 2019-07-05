@@ -112,7 +112,7 @@ Rcpp::List rcpp_parse_topic_state (std::string fpath, int termflag=1, int docfla
 	{
 
 	    if (linecount % 100000 == 0 && linecount != 0)
-		Rcpp::Rcout << std::setprecision(3) << (double)linecount / 1000000 << " million lines \n";
+		Rcpp::Rcout << std::setprecision(3) << (double)linecount / 1000000 << " million lines" << std::flush << std::endl;;
 
 	    int docindex, pos, typeindex, topic;
 	    std::string source, type;
