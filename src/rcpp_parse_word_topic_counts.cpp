@@ -34,6 +34,9 @@ Rcpp::NumericMatrix rcpp_parse_word_topic_counts (std::string fpath, int ntopics
 	std::string line;
 	while (getline(infile, line))
 	{
+	    if (linecounter % 100000 == 0 && linecounter != 0)
+		Rcpp::Rcout << std::setprecision(3) << (double)linecounter / 1000000 << " million lines \n";
+
 	    std::vector<std::string> elem = split(line, ' ');
 	    std::string term = elem[1];
 	    terms.push_back(term);

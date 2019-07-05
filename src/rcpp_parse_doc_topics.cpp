@@ -1,6 +1,7 @@
 #include <Rcpp.h>
 #include <cstring> //strtok and igzstream
 #include <cmath> //ceil and floor
+#include <iomanip>
 #include "gzstream.h" // add -lz to compile
 
 // should be able to handle gz doc topics and mallet doc topics form
@@ -80,6 +81,9 @@ Rcpp::List rcpp_parse_doc_topics_gz(std::string fpath, int topn, std::string ttf
 	//read characters until first newline:
 	while (infile.get(c)) 
 	{
+	    if (line_index % 100000 == 0 && line_index != 0)
+		Rcpp::Rcout << std::setprecision(3) << (double)line_index / 1000000 << " million lines \n";
+
 	    line = line + c;
 
 	    // FOR THE FIRST LINE
@@ -268,6 +272,9 @@ Rcpp::List rcpp_parse_doc_topics_mallet(std::string fpath, int topn, std::string
     {
 	while (getline(infile, line))
 	{
+	    if (line_index % 100000 == 0 && line_index != 0)
+		Rcpp::Rcout << std::setprecision(3) << (double)line_index / 1000000 << " million lines \n";
+
 	    elem = strsplit(line, '\t');
 	    elem.erase (elem.begin(), elem.begin() + 2); // delete the first two values
 	    for (int i = 0; i < ntopics; i++)

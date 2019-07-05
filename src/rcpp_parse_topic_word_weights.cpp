@@ -22,6 +22,7 @@ Rcpp::NumericMatrix rcpp_parse_topic_word_weights (std::string fpath)
     double weight;
     std::string term;
     int index = 0;
+    int line_index = 0;
 
     int ntopics = 0;
     int past = -1;
@@ -53,6 +54,8 @@ Rcpp::NumericMatrix rcpp_parse_topic_word_weights (std::string fpath)
 
     while (infile >> topic >> term >> weight)
     {
+	if (line_index % 100000 == 0 && line_index != 0)
+	    Rcpp::Rcout << std::setprecision(3) << (double)line_index / 1000000 << " million lines \n";
 	results(topic, terms_map[term]) = weight;
     } // while infile >> topic ...
 
