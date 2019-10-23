@@ -1,4 +1,4 @@
-Package: malletparseDSI
+Package: malletparse
 Type: Package
 Title: Parses mallet output files without using rJava
 Version: 1.0

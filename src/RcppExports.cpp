@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // rcpp_parse_doc_topics
 Rcpp::List rcpp_parse_doc_topics(std::string fpath, int topn, std::string ttfile, double q, const Rcpp::NumericVector doc_lens);
-RcppExport SEXP _malletparseDSI_rcpp_parse_doc_topics(SEXP fpathSEXP, SEXP topnSEXP, SEXP ttfileSEXP, SEXP qSEXP, SEXP doc_lensSEXP) {
+RcppExport SEXP _malletparse_rcpp_parse_doc_topics(SEXP fpathSEXP, SEXP topnSEXP, SEXP ttfileSEXP, SEXP qSEXP, SEXP doc_lensSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -22,7 +22,7 @@ END_RCPP
 }
 // rcpp_parse_topic_state
 Rcpp::List rcpp_parse_topic_state(std::string fpath, int termflag, int docflag, int ttflag, int dtflag, std::string dtfile);
-RcppExport SEXP _malletparseDSI_rcpp_parse_topic_state(SEXP fpathSEXP, SEXP termflagSEXP, SEXP docflagSEXP, SEXP ttflagSEXP, SEXP dtflagSEXP, SEXP dtfileSEXP) {
+RcppExport SEXP _malletparse_rcpp_parse_topic_state(SEXP fpathSEXP, SEXP termflagSEXP, SEXP docflagSEXP, SEXP ttflagSEXP, SEXP dtflagSEXP, SEXP dtfileSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -38,7 +38,7 @@ END_RCPP
 }
 // rcpp_parse_topic_word_weights
 Rcpp::NumericMatrix rcpp_parse_topic_word_weights(std::string fpath);
-RcppExport SEXP _malletparseDSI_rcpp_parse_topic_word_weights(SEXP fpathSEXP) {
+RcppExport SEXP _malletparse_rcpp_parse_topic_word_weights(SEXP fpathSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -49,7 +49,7 @@ END_RCPP
 }
 // rcpp_parse_word_topic_counts
 Rcpp::NumericMatrix rcpp_parse_word_topic_counts(std::string fpath, int ntopics);
-RcppExport SEXP _malletparseDSI_rcpp_parse_word_topic_counts(SEXP fpathSEXP, SEXP ntopicsSEXP) {
+RcppExport SEXP _malletparse_rcpp_parse_word_topic_counts(SEXP fpathSEXP, SEXP ntopicsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -61,14 +61,14 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_malletparseDSI_rcpp_parse_doc_topics", (DL_FUNC) &_malletparseDSI_rcpp_parse_doc_topics, 5},
-    {"_malletparseDSI_rcpp_parse_topic_state", (DL_FUNC) &_malletparseDSI_rcpp_parse_topic_state, 6},
-    {"_malletparseDSI_rcpp_parse_topic_word_weights", (DL_FUNC) &_malletparseDSI_rcpp_parse_topic_word_weights, 1},
-    {"_malletparseDSI_rcpp_parse_word_topic_counts", (DL_FUNC) &_malletparseDSI_rcpp_parse_word_topic_counts, 2},
+    {"_malletparse_rcpp_parse_doc_topics", (DL_FUNC) &_malletparse_rcpp_parse_doc_topics, 5},
+    {"_malletparse_rcpp_parse_topic_state", (DL_FUNC) &_malletparse_rcpp_parse_topic_state, 6},
+    {"_malletparse_rcpp_parse_topic_word_weights", (DL_FUNC) &_malletparse_rcpp_parse_topic_word_weights, 1},
+    {"_malletparse_rcpp_parse_word_topic_counts", (DL_FUNC) &_malletparse_rcpp_parse_word_topic_counts, 2},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_malletparseDSI(DllInfo *dll) {
+RcppExport void R_init_malletparse(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

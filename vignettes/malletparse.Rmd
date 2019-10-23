@@ -1,0 +1,106 @@
+---
+title: "malletparse"
+author: "Arthur Koehl"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+---
+
+```{r setup, include = FALSE}
+  knitr::opts_chunk$set(
+			collapse = TRUE,
+			comment = "#>"
+  )
+```
+
+# Quick Start
+
+This page outlines the ways to use this package for parsing various output files from Mallet.  
+Refer the the README for this package for more information.
+Note that topic ids and document ids start at 0 in Mallet's outputfiles.
+
+first load the package
+```{r}
+library(malletparse)
+```
+
+## 1. State File
+
+The State file contains all the information that you will need from the model.  
+This command shows how to parse the topic state file without saving the doc topics to an output file. 
+Note that with the 'dtflag' argument set to 0, the document topics matrix does not get saved in R and will be empty in the returned object.
+Set 'dtflag' to 1 to save the matrix, this argument is independent of saving the doc topics to file (i.e can be set to 1 or 0 when you save to file)
+
+```{r}
+# use this to save to file: statelist = rcpp_parse_topic_state("../data/state-file.gz", dtflag=0, dtfile="../data/doc-topics.gz") 
+statefile = system.file("extdata", "state-file.gz", package="malletparse")
+statelist = rcpp_parse_topic_state(statefile, dtflag=0)
+str(statelist)
+```
+
+## 2. Doc Topics File
+
+In Mallet, you can output the document topics matrix to a file. 
+When parsing the file with **rcpp_parse_doc_topics** you can pass a vector of integers of the length of each document in the model. 
+If you pass that vector, rcpp_parse_doc_topics will calculate the topic frequencies, a necessary part of **LDAvis**.
+
+```{r}
+dtfile = system.file("extdata", "doc-topics.dat", package="malletparse")
+dtlist = rcpp_parse_doc_topics(dtfile, 20, doc_lens = statelist$doc_lens) #second arg is number of documents to save for each topic
+str(dtlist)
+```
+
+You can do exactly the same thing with a gzipped doc topics file created with the **rcpp_parse_topic_state** function.
+
+```{r}
+dtfile2 = system.file("extdata", "doc-topics.gz", package="malletparse")
+dtlist2 = rcpp_parse_doc_topics(dtfile2, 20, doc_lens = statelist$doc_lens)
+str(dtlist2)
+```
+
+## 3. Topic Terms
+
+### a. Word Topic Counts File 
+
+With this package you can extract the topic terms matrix wihtout using the Mallet state file by using the information from word-topic-counts or word-weights.  
+
+
+To extract the topic terms from the word-topic-counts file, you need to pass in the number of topics as an input parameter.
+```{r}
+wtcfile = system.file("extdata", "word-topic-counts.dat", package="malletparse")
+topic_terms = rcpp_parse_word_topic_counts(wtcfile, 10) # third arg is ntopics
+print(dim(topic_terms))
+print(head(topic_terms[,1:5]))
+```
+
+## b. Topic Word Weights File 
+
+Just like above, but you don't need to pass the number of topics as an input parameter.
+```{r}
+wwfile = system.file("extdata", "word-weights.dat", package="malletparse")
+topic_terms = rcpp_parse_topic_word_weights(wwfile)
+print(dim(topic_terms))
+print(head(topic_terms[,1:5]))
+```
+
+## LDAvis 
+
+This package has a modified version of LDAvis' createJSON function that does not require the document topics matrix as input.
+Instead, it uses the topic_frequencies calculated from the state file, or from a sample of the document topics.
+This avoids having to ever load the document topics matrix into memory.
+
+### a. modified createJSON
+```{r}
+tt_dist = t(apply(topic_terms, 1, function(x) x/sum(x))) ## convert topic terms count matrix to distribution
+
+json = no_doc_topics_createJSON(
+	phi = tt_dist, 
+	topic.frequency = dtlist$topic_frequencies, 
+	vocab = statelist$terms, 
+	term.frequency = statelist$term_freqs)
+```
+
+### b. visualize with LDAvis
+```{r}
+library(LDAvis)
+LDAvis::serVis(json)
+```

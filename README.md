@@ -1,4 +1,4 @@
-# Mallet Parse DSI #
+# Mallet Parse#
 
 This package is meant as a conveniant and fast way of parsing the output files from a MALLET topic model. 
 Notably it parses the text file outputs and does not use [rJava](https://cran.r-project.org/web/packages/rjava/index.html) to parse the java binary objects. 
@@ -7,11 +7,11 @@ Also contains custom functions for creating the json part of [LDAvis](https://gi
 
 ## Installation Instructions ##
 
-Clone the bitbucket repository. Through the command line run R CMD build and R CMD INSTALL. When installed refer to the **vignette** to see how to use it.
+Clone the github repository. Through the command line run R CMD build and R CMD INSTALL. When installed refer to the **vignette** to see how to use it.
 
 Alternatively
 ```
-devtools::install_bitbucket("digitalscholarship/malletparsedsi")
+devtools::install_github("ucdavisdatalab/malletparse")
 ```
 
 ## Mallet Output Files ##

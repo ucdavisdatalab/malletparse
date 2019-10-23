@@ -23,7 +23,7 @@
 #' }
 #' @export
 rcpp_parse_doc_topics <- function(fpath, topn, ttfile = "", q = 0.70, doc_lens = as.numeric( c())) {
-    .Call(`_malletparseDSI_rcpp_parse_doc_topics`, fpath, topn, ttfile, q, doc_lens)
+    .Call(`_malletparse_rcpp_parse_doc_topics`, fpath, topn, ttfile, q, doc_lens)
 }
 
 #' Rcpp Parse Topic State File --output-state
@@ -57,7 +57,7 @@ rcpp_parse_doc_topics <- function(fpath, topn, ttfile = "", q = 0.70, doc_lens =
 #' }
 #' @export
 rcpp_parse_topic_state <- function(fpath, termflag = 1L, docflag = 1L, ttflag = 1L, dtflag = 1L, dtfile = "") {
-    .Call(`_malletparseDSI_rcpp_parse_topic_state`, fpath, termflag, docflag, ttflag, dtflag, dtfile)
+    .Call(`_malletparse_rcpp_parse_topic_state`, fpath, termflag, docflag, ttflag, dtflag, dtfile)
 }
 
 #' Rcpp Parse Topic Word Weights File --topic-word-weights
@@ -71,7 +71,7 @@ rcpp_parse_topic_state <- function(fpath, termflag = 1L, docflag = 1L, ttflag = 
 #' @return topicterms A matrix with topic terms, terms as colnames.
 #' @export
 rcpp_parse_topic_word_weights <- function(fpath) {
-    .Call(`_malletparseDSI_rcpp_parse_topic_word_weights`, fpath)
+    .Call(`_malletparse_rcpp_parse_topic_word_weights`, fpath)
 }
 
 #' Rcpp Parse Topic Counts File --word-topic-counts
@@ -86,6 +86,6 @@ rcpp_parse_topic_word_weights <- function(fpath) {
 #' @return topicterms A matrix with topic terms, terms as colnames.
 #' @export
 rcpp_parse_word_topic_counts <- function(fpath, ntopics) {
-    .Call(`_malletparseDSI_rcpp_parse_word_topic_counts`, fpath, ntopics)
+    .Call(`_malletparse_rcpp_parse_word_topic_counts`, fpath, ntopics)
 }
 
